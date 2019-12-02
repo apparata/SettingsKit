@@ -15,11 +15,11 @@ import SwiftUI
 /// ```
 public struct SegmentedPickerSetting<T: CustomStringConvertible & Hashable & Identifiable>: View {
 
-    public let title: String
+    private let title: String
     
-    public let values: [T]
+    private let values: [T]
 
-    @Binding public var selected: T
+    @Binding private var selected: T
 
     public var body: some View {
         Picker(selection: $selected, label: Text(title)) {
@@ -28,5 +28,11 @@ public struct SegmentedPickerSetting<T: CustomStringConvertible & Hashable & Ide
             }
         }
         .pickerStyle(SegmentedPickerStyle())
+    }
+    
+    public init(title: String = "", values: [T], selected: Binding<T>) {
+        self.title = title
+        self.values = values
+        self._selected = selected
     }
 }

@@ -14,9 +14,9 @@ import SwiftUI
 /// ```
 struct TitleEditableTextSetting: View {
 
-    public let title: String
+    private let title: String
     
-    @Binding public var value: String
+    @Binding private var value: String
 
     public var body: some View {
         HStack {
@@ -27,6 +27,11 @@ struct TitleEditableTextSetting: View {
                 .foregroundColor(.secondary)
                 .frame(maxWidth: 100)
         }
+    }
+    
+    public init(title: String, value: Binding<String>) {
+        self.title = title
+        self._value = value
     }
 }
 

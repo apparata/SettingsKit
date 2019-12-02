@@ -15,11 +15,11 @@ import SwiftUI
 /// ```
 public struct ValuePickerSetting<T: CustomStringConvertible & Hashable & Identifiable>: View {
 
-    public let title: String
+    private let title: String
     
-    public let values: [T]
+    private let values: [T]
 
-    @Binding public var selected: T
+    @Binding private var selected: T
 
     public var body: some View {
         Picker(selection: $selected, label: Text(title)) {

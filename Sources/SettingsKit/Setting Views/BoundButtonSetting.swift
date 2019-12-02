@@ -4,10 +4,10 @@
 
 import SwiftUI
 
-public struct ButtonSetting: View {
+public struct BoundButtonSetting: View {
 
-    private var title: String
-    
+    @Binding private var title: String
+
     private var action: () -> Void
     
     public var body: some View {
@@ -18,8 +18,8 @@ public struct ButtonSetting: View {
         }
     }
     
-    public init(_ title: String, action: @escaping () -> Void) {
-        self.title = title
+    public init(_ title: Binding<String>, action: @escaping () -> Void) {
+        self._title = title
         self.action = action
     }
 }

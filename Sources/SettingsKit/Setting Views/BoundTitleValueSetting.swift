@@ -4,11 +4,11 @@
 
 import SwiftUI
 
-public struct TitleValueSetting: View {
+public struct BoundTitleValueSetting: View {
 
     private let title: String
     
-    private let value: String
+    @Binding private var value: String
 
     public var body: some View {
         HStack {
@@ -18,8 +18,8 @@ public struct TitleValueSetting: View {
         }
     }
     
-    public init(title: String, value: String) {
+    public init(title: String, value: Binding<String>) {
         self.title = title
-        self.value = value
+        self._value = value
     }
 }

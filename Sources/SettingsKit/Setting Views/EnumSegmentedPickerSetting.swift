@@ -31,9 +31,9 @@ import Combine
  */
 public struct EnumSegmentedPickerSetting<T: CaseIterable & CustomStringConvertible & Hashable & Identifiable>: View {
 
-    public let title: String
+    private let title: String
     
-    @Binding public var selected: T
+    @Binding private var selected: T
 
     public var body: some View {
         Picker(selection: $selected, label: Text(title)) {
@@ -42,5 +42,10 @@ public struct EnumSegmentedPickerSetting<T: CaseIterable & CustomStringConvertib
             }
         }
         .pickerStyle(SegmentedPickerStyle())
+    }
+    
+    public init(title: String = "", selected: Binding<T>) {
+        self.title = title
+        self._selected = selected
     }
 }

@@ -6,7 +6,7 @@ import SwiftUI
 
 public struct TitleSetting: View {
 
-    public let title: String
+    private let title: String
 
     public var body: some View {
         Text(title)

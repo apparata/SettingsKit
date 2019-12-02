@@ -6,13 +6,18 @@ import SwiftUI
 
 public struct SwitchSetting: View {
 
-    public let title: String
+    private let title: String
     
-    @Binding public var isOn: Bool
+    @Binding private var isOn: Bool
     
     public var body: some View {
         Toggle(isOn: $isOn) {
             Text(title)
         }
+    }
+    
+    public init(title: String = "", isOn: Binding<Bool>) {
+        self.title = title
+        self._isOn = isOn
     }
 }
