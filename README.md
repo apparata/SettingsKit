@@ -55,7 +55,7 @@ class SomeClass {
 ```Swift
 @State private var buttonTitle: String = "On"
 
-BoundButton($buttonTitle) {
+BoundButtonSetting($buttonTitle) {
     self.buttonTitle = "Off"
 }
 ```
@@ -63,7 +63,7 @@ BoundButton($buttonTitle) {
 ### `ButtonSetting`
 
 ```Swift
-Button("OK") {
+ButtonSetting("OK") {
     print("OK!")
 }
 ```
@@ -73,7 +73,7 @@ Button("OK") {
 Red button for destructive actions.
 
 ```Swift
-DestructiveButton("Delete") {
+DestructiveButtonSetting("Delete") {
     print("Destroy!")
 }
 ```
