@@ -1,25 +1,77 @@
 //
-//  Copyright © 2019 Apparata AB. All rights reserved.
+//  Copyright © 2021 Apparata AB. All rights reserved.
 //
 
 import SwiftUI
 
-public struct ButtonSetting: View {
+// MARK: - ButtonSetting
 
-    private var title: String
+public struct ButtonSetting<Label: View>: View {
     
-    private var action: () -> Void
+    let icon: SettingIcon?
+
+    let label: Label
+    
+    let action: () -> Void
     
     public var body: some View {
         Button(action: action) {
-            Text(title)
-                .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
+            if let icon = icon {
+                HStack {
+                    icon
+                    label
+                        .foregroundColor(Color.primary)
+                }
+            } else {
+                label
+                    .frame(maxWidth: .infinity)
+            }
         }
     }
     
-    public init(_ title: String, action: @escaping () -> Void) {
-        self.title = title
+    public init(label: Label, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+        self.label = label
+        self.icon = icon
         self.action = action
+    }
+}
+
+
+extension ButtonSetting where Label == Text {
+    
+    public init(_ titleKey: LocalizedStringKey, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+        self.label = Text(titleKey)
+            .fontWeight(icon == nil ? .semibold : .regular)
+        self.icon = icon
+        self.action = action
+    }
+    
+    public init<S: StringProtocol>(_ title: S, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+        self.label = Text(title)
+            .fontWeight(icon == nil ? .semibold : .regular)
+        self.icon = icon
+        self.action = action
+    }
+}
+
+// MARK: - Preview
+
+struct ButtonSetting_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            Form {
+                Section {
+                    ButtonSetting("Title") {
+                        print("Hello")
+                    }
+                    ButtonSetting("Title", icon: SettingIcon("shippingbox.fill")) {
+                        print("Hello")
+                    }
+                    ButtonSetting(label: Text("Title").fontWeight(.semibold)) {
+                        print("Hello")
+                    }
+                }
+            }.navigationTitle("Settings")
+        }
     }
 }

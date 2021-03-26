@@ -7,8 +7,7 @@
 MODULE=SettingsKit
 AUTHOR="Apparata AB"
 AUTHOR_URL=https://apparata.se
-# Uncomment if library is on GitHub.
-# GITHUB_URL=https://github.com/apparata/NAME_OF_REPO_GOES_HERE
+GITHUB_URL=https://github.com/apparata/SettingsKit
 
 # Change directory to where this script is located and go up one step
 cd "$(dirname ${BASH_SOURCE[0]})/.."

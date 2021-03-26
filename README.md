@@ -11,6 +11,8 @@ See the LICENSE file for licensing information.
 
  Base class for observable settings objects.
 
+**Example:**
+
 ```Swift
 public class Settings: ObservableUserDefaults {
      
@@ -42,6 +44,8 @@ private func subscribeToAPIEnvironmentChanges() {
 
 Example of using the `@UserDefault` property wrapper.
 
+**Example:**
+
 ```Swift
 class SomeClass {
     @UserDefault("THE_KEY", default: 8)
@@ -50,17 +54,9 @@ class SomeClass {
 
 ## Form Row Views
 
-### `BoundButtonSetting`
-
-```Swift
-@State private var buttonTitle: String = "On"
-
-BoundButtonSetting($buttonTitle) {
-    self.buttonTitle = "Off"
-}
-```
-
 ### `ButtonSetting`
+
+**Example:**
 
 ```Swift
 ButtonSetting("OK") {
@@ -72,19 +68,31 @@ ButtonSetting("OK") {
 
 Red button for destructive actions.
 
+**Example:**
+
 ```Swift
 DestructiveButtonSetting("Delete") {
     print("Destroy!")
 }
 ```
 
-### `EnumPickerSetting`
+### `LinkSetting`
+
+**Example:**
+
+```Swift
+LinkSetting("Github", url: URL(string: "https://github.com")!) {
+    print("OK!")
+}
+```
+
+### `EnumSetting`
 
 Setting view for picking an enum value.
  
-The enum should be `CaseIterable`, `Codable`, `Identifiable`, and `CustomStringConvertible`.
+The enum should be `CaseIterable` and `Pickable`, which is a typealias for the combination of `Codable`, `Identifiable`, and `CustomStringConvertible`.
  
-*Example:*
+**Example:**
  
 ```Swift
 public enum APIEnvironment: String, CaseIterable, Codable, Identifiable {
@@ -101,12 +109,16 @@ extension APIEnvironment: CustomStringConvertible {
     public var id: APIEnvironment { self }
 }
 
-@State private var selectedAPIEnvironment: APIEnvironment
+@State private var apiEnvironment: APIEnvironment
 
-EnumPickerSetting(title: "API Environment", selected: $selectedAPIEnvironment)
+EnumSetting("API Environment", selection: $apiEnvironment)
 ```
 
-### `EnumSegmentedPickerSetting`
+### `SegmentedEnumSetting`
+
+The enum should be `CaseIterable` and `Pickable`, which is a typealias for the combination of `Codable`, `Identifiable`, and `CustomStringConvertible`.
+
+**Example:**
 
 ```Swift
 public enum APIEnvironment: String, CaseIterable, Codable, Identifiable {
@@ -123,60 +135,64 @@ extension APIEnvironment: CustomStringConvertible {
     public var id: APIEnvironment { self }
 }
 
-@State private var selectedAPIEnvironment: APIEnvironment
+@State private var apiEnvironment: APIEnvironment
 
-EnumSegmentedPickerSetting(selected: $selectedAPIEnvironment)
+SegmentedEnumSetting(selection: $apiEnvironment)
 ```
 
-### `SegmentedPickerSetting`
+### `SegmentedSetting`
 
 A segmented setting view for picking a value from a collection.
 
-*Example:*
+**Example:**
 
 ```Swift
-SegmentedPickerSetting(title: "API Environment",
-                       values: APIEnvironment.allCases,
-                       selected: $settings.apiEnvironment)
+SegmentedSetting("API Environment",
+                 values: APIEnvironment.allCases,
+                 selection: $settings.apiEnvironment)
 ```
 
-### `SwiftSetting`
+### `SwitchSetting`
+
+**Example:**
 
 ```Swift
 @State private var isLogEnabled: Bool
 
-SwitchSetting(title: "Enable log", isOn: $isLogEnabled)
+SwitchSetting("Enable log", isOn: $isLogEnabled)
 ```
 
-### `TitleEditableTextSetting`
+### `TextFieldTextSetting`
 
 Title and text field setting.
 
-*Example:*
+**Example:**
 
 ```Swift
-TitleEditableTextSetting(title: "Log Filename",
-                         value: $settings.logFilename)
+TextFieldSetting("Log Filename",
+                 value: $settings.logFilename)
 ```
 
-### `TitleSetting`
+### `LabelSetting`
+
+**Example:**
 
 ```Swift
-TitleSetting(title: "Name")
+LabelSetting("Name")
 ```
-
-### `TitleValueSetting`
 
 ```Swift
-TitleValueSetting(title: "Name", value: "Steve")
+LabelSetting("Name", value: "Steve")
 ```
 
-### `ValuePickerSetting`
+### `PickerSetting`
 
 A setting view for picking a value from a collection.
 
+**Example:**
+
 ```Swift
-ValuePickerSetting(title: "API Environment",
-                   values: APIEnvironment.allCases,
-                   selected: $settings.apiEnvironment)
+PickerSetting("API Environment",
+              values: APIEnvironment.allCases,
+              selection: $settings.apiEnvironment)
 ```
