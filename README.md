@@ -3,7 +3,7 @@
 
 ## License
 
-See the LICENSE file for licensing information.
+See the LICENSE file for licensing information. (It's the MIT license.)
 
 ## User Defaults
 
