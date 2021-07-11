@@ -24,40 +24,50 @@ public struct TextFieldSetting<Label: View>: View {
 
     let placeholder: String
     
+    let onEditingChanged: (Bool) -> Void
+    
+    let onCommit: () -> Void
+    
     public var body: some View {
         HStack {
             icon
             label
             Spacer()
-            TextField(placeholder, text: $value)
+            TextField(placeholder, text: $value, onEditingChanged: onEditingChanged, onCommit: onCommit)
                 .multilineTextAlignment(.trailing)
                 .foregroundColor(.secondary)
                 .frame(maxWidth: 100)
         }
     }
     
-    public init(label: Label, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil) {
+    public init(label: Label, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = label
         self._value = value
         self.placeholder = placeholder
         self.icon = icon
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
     }
 }
 
 extension TextFieldSetting where Label == Text {
     
-    public init(_ titleKey: LocalizedStringKey, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil) {
+    public init(_ titleKey: LocalizedStringKey, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = Text(titleKey)
         self._value = value
         self.placeholder = placeholder
         self.icon = icon
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
     }
 
-    public init<S: StringProtocol>(_ title: S, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil) {
+    public init<S: StringProtocol>(_ title: S, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = Text(title)
         self._value = value
         self.placeholder = placeholder
         self.icon = icon
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
     }
 }
 
