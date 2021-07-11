@@ -24,6 +24,8 @@ public struct TextFieldSetting<Label: View>: View {
 
     let placeholder: String
     
+    let formatter: Formatter?
+    
     let onEditingChanged: (Bool) -> Void
     
     let onCommit: () -> Void
@@ -33,18 +35,26 @@ public struct TextFieldSetting<Label: View>: View {
             icon
             label
             Spacer()
-            TextField(placeholder, text: $value, onEditingChanged: onEditingChanged, onCommit: onCommit)
-                .multilineTextAlignment(.trailing)
-                .foregroundColor(.secondary)
-                .frame(maxWidth: 100)
+            if let formatter = formatter {
+                TextField(placeholder, value: $value, formatter: formatter, onEditingChanged: onEditingChanged, onCommit: onCommit)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: 100)
+            } else {
+                TextField(placeholder, text: $value, onEditingChanged: onEditingChanged, onCommit: onCommit)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: 100)
+            }
         }
     }
     
-    public init(label: Label, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
+    public init(label: Label, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, formatter: Formatter? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = label
         self._value = value
         self.placeholder = placeholder
         self.icon = icon
+        self.formatter = formatter
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
     }
@@ -52,18 +62,20 @@ public struct TextFieldSetting<Label: View>: View {
 
 extension TextFieldSetting where Label == Text {
     
-    public init(_ titleKey: LocalizedStringKey, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
+    public init(_ titleKey: LocalizedStringKey, value: Binding<String>, formatter: Formatter? = nil, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = Text(titleKey)
         self._value = value
+        self.formatter = formatter
         self.placeholder = placeholder
         self.icon = icon
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
     }
 
-    public init<S: StringProtocol>(_ title: S, value: Binding<String>, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
+    public init<S: StringProtocol>(_ title: S, value: Binding<String>, formatter: Formatter? = nil, placeholder: String = "", icon: SettingIcon? = nil, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = { }) {
         self.label = Text(title)
         self._value = value
+        self.formatter = formatter
         self.placeholder = placeholder
         self.icon = icon
         self.onEditingChanged = onEditingChanged
