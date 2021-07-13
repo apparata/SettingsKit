@@ -39,12 +39,12 @@ public struct TextFieldSetting<Label: View>: View {
                 TextField(placeholder, value: $value, formatter: formatter, onEditingChanged: onEditingChanged, onCommit: onCommit)
                     .multilineTextAlignment(.trailing)
                     .foregroundColor(.secondary)
-                    .frame(maxWidth: 100)
+                    .frame(maxWidth: 200)
             } else {
                 TextField(placeholder, text: $value, onEditingChanged: onEditingChanged, onCommit: onCommit)
                     .multilineTextAlignment(.trailing)
                     .foregroundColor(.secondary)
-                    .frame(maxWidth: 100)
+                    .frame(maxWidth: 200)
             }
         }
     }
