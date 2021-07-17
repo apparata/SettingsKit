@@ -12,6 +12,8 @@ public struct ButtonSetting<Label: View>: View {
 
     let label: Label
     
+    let color: Color?
+    
     let action: () -> Void
     
     public var body: some View {
@@ -20,17 +22,19 @@ public struct ButtonSetting<Label: View>: View {
                 HStack {
                     icon
                     label
-                        .foregroundColor(Color.primary)
+                        .foregroundColor(color ?? .primary)
                 }
             } else {
                 label
+                    .foregroundColor(color ?? .accentColor)
                     .frame(maxWidth: .infinity)
             }
         }
     }
     
-    public init(label: Label, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+    public init(label: Label, color: Color? = nil, icon: SettingIcon? = nil, action: @escaping () -> Void) {
         self.label = label
+        self.color = color
         self.icon = icon
         self.action = action
     }
@@ -39,16 +43,18 @@ public struct ButtonSetting<Label: View>: View {
 
 extension ButtonSetting where Label == Text {
     
-    public init(_ titleKey: LocalizedStringKey, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+    public init(_ titleKey: LocalizedStringKey, color: Color? = nil, icon: SettingIcon? = nil, action: @escaping () -> Void) {
         self.label = Text(titleKey)
             .fontWeight(icon == nil ? .semibold : .regular)
+        self.color = color
         self.icon = icon
         self.action = action
     }
     
-    public init<S: StringProtocol>(_ title: S, icon: SettingIcon? = nil, action: @escaping () -> Void) {
+    public init<S: StringProtocol>(_ title: S, color: Color? = nil, icon: SettingIcon? = nil, action: @escaping () -> Void) {
         self.label = Text(title)
             .fontWeight(icon == nil ? .semibold : .regular)
+        self.color = color
         self.icon = icon
         self.action = action
     }

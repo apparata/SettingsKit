@@ -12,6 +12,8 @@ public struct LinkSetting<Label: View>: View {
 
     let label: Label
     
+    let color: Color?
+    
     let url: URL
     
     public var body: some View {
@@ -20,34 +22,38 @@ public struct LinkSetting<Label: View>: View {
                 HStack {
                     icon
                     label
-                        .foregroundColor(Color.primary)
+                        .foregroundColor(color ?? .primary)
                 }
             } else {
                 label
+                    .foregroundColor(color ?? .accentColor)
                     .frame(maxWidth: .infinity)
             }
         }
     }
     
-    public init(label: Label, url: URL, icon: SettingIcon? = nil) {
+    public init(label: Label, url: URL, color: Color? = nil, icon: SettingIcon? = nil) {
         self.label = label
         self.icon = icon
+        self.color = color
         self.url = url
     }
 }
 
 extension LinkSetting where Label == Text {
     
-    public init(_ titleKey: LocalizedStringKey, url: URL, icon: SettingIcon? = nil) {
+    public init(_ titleKey: LocalizedStringKey, url: URL, color: Color? = nil, icon: SettingIcon? = nil) {
         self.label = Text(titleKey)
             .fontWeight(icon == nil ? .semibold : .regular)
+        self.color = color
         self.icon = icon
         self.url = url
     }
     
-    public init<S: StringProtocol>(_ title: S, url: URL, icon: SettingIcon? = nil) {
+    public init<S: StringProtocol>(_ title: S, url: URL, color: Color? = nil, icon: SettingIcon? = nil) {
         self.label = Text(title)
             .fontWeight(icon == nil ? .semibold : .regular)
+        self.color = color
         self.icon = icon
         self.url = url
     }
