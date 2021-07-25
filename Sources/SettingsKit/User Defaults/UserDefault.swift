@@ -20,21 +20,29 @@ public class UserDefault<T: Codable> {
     
     public var wrappedValue: T {
         get {
-            guard let data = UserDefaults.standard.data(forKey: key) else {
-                return defaultValue
+            if isBasicType {
+                return UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
+            } else {
+                guard let data = UserDefaults.standard.data(forKey: key) else {
+                    return defaultValue
+                }
+                guard let value = try? JSONDecoder().decode(T.self, from: data) else {
+                    return defaultValue
+                }
+                return value
             }
-            guard let value = try? JSONDecoder().decode(T.self, from: data) else {
-                return defaultValue
-            }
-            return value
         }
         set {
-            guard let data = try? JSONEncoder().encode(newValue) else {
-                print("Error: Failed to store user default value for key '\(key)'")
-                UserDefaults.standard.removeObject(forKey: key)
-                return
+            if isBasicType {
+                UserDefaults.standard.set(newValue, forKey: key)
+            } else {
+                guard let data = try? JSONEncoder().encode(newValue) else {
+                    print("Error: Failed to store user default value for key '\(key)'")
+                    UserDefaults.standard.removeObject(forKey: key)
+                    return
+                }
+                UserDefaults.standard.set(data, forKey: key)
             }
-            UserDefaults.standard.set(data, forKey: key)
         }
     }
     
@@ -42,6 +50,19 @@ public class UserDefault<T: Codable> {
         userDefaultObserver.publisher
             .map { self.wrappedValue }
             .eraseToAnyPublisher()
+    }
+    
+    private var isBasicType: Bool {
+        T.self == Bool.self
+            || T.self == Float.self
+            || T.self == Double.self
+            || T.self == Int.self
+            || T.self == Int32.self
+            || T.self == Int16.self
+            || T.self == String.self
+            || T.self == URL.self
+            || T.self == Date.self
+            || T.self == Data.self
     }
     
     private let userDefaultObserver: UserDefaultObserver
