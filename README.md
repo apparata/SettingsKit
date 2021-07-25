@@ -9,7 +9,7 @@ See the LICENSE file for licensing information. (It's the MIT license.)
 
 ### `ObservableUserDefaults`
 
- Base class for observable settings objects.
+ Base class for observable settings objects. **NOTE:** There must not be dots in the key, or the kvo observation does not work, for some reason.
 
 **Example:**
 
@@ -42,7 +42,7 @@ private func subscribeToAPIEnvironmentChanges() {
 
 ### `@UserDefault`
 
-Example of using the `@UserDefault` property wrapper.
+Example of using the `@UserDefault` property wrapper. If you have `@AppStorage` properties in your SwiftUI views, the same keys can be used with `@UserDefault` to access the same values.
 
 **Example:**
 
