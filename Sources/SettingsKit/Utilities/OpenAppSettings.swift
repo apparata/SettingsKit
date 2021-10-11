@@ -6,6 +6,7 @@
 
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 public func openAppSettings(completionHandler: ((_ success: Bool) -> Void)? = nil) {
     guard let appSettingsURL = URL(string: UIApplication.openSettingsURLString) else {
         completionHandler?(false)
