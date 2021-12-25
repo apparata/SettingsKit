@@ -48,6 +48,14 @@ extension LabelSetting where Label == Text, Value == Text {
     }
 }
 
+extension LabelSetting where Label == Text, Value == Image {
+    public init(_ title: String, value: Image, icon: SettingIcon? = nil) {
+        self.label = Text(title)
+        self.value = value
+        self.icon = icon
+    }
+}
+
 // MARK: - Preview
 
 struct LabelValueSetting_Previews: PreviewProvider {
