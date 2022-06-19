@@ -10,25 +10,29 @@ public struct SettingIcon: View {
     
     let color: Color
     
+    let titleColor: Color
+    
     public var body: some View {
         ZStack {
             color
                 .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             icon
                 .imageScale(.small)
-                .foregroundColor(.white)
+                .foregroundColor(titleColor)
         }
         .frame(width: 24, height: 24)
     }
 
-    public init(_ systemIcon: String, color: Color = .accentColor) {
+    public init(_ systemIcon: String, color: Color = .accentColor, titleColor: Color = .white) {
         self.icon = Image(systemName: systemIcon)
         self.color = color
+        self.titleColor = titleColor
     }
     
-    public init(name: String, color: Color = .accentColor) {
+    public init(name: String, color: Color = .accentColor, titleColor: Color = .white) {
         self.icon = Image(name)
         self.color = color
+        self.titleColor = titleColor
     }
 }
 
