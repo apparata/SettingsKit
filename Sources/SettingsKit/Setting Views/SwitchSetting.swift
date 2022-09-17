@@ -16,8 +16,10 @@ public struct SwitchSetting<Label: View>: View {
     
     public var body: some View {
         Toggle(isOn: $isOn) {
-            icon
-            label
+            HStack(spacing: 8) {
+                icon
+                label
+            }
         }
     }
     
