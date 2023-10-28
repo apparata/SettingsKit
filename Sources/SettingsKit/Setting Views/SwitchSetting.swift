@@ -54,12 +54,16 @@ struct SwitchSetting_Previews: PreviewProvider {
                 Section {
                     SwitchSetting("Title", isOn: .constant(false))
                     SwitchSetting("Title", isOn: .constant(true))
-                    SwitchSetting("Title",
-                                  isOn: .constant(true),
-                                  icon: SettingIcon("pc"))
-                    SwitchSetting("Title",
-                                  isOn: .constant(false),
-                                  icon: SettingIcon("cpu", color: .green))
+                    SwitchSetting(
+                        "Title",
+                        isOn: .constant(true),
+                        icon: SettingIcon("pc")
+                    )
+                    SwitchSetting(
+                        "Title",
+                        isOn: .constant(false),
+                        icon: SettingIcon("cpu")
+                    )
                 }
             }.navigationTitle("Settings")
         }

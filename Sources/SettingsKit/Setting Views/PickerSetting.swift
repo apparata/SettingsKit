@@ -83,17 +83,23 @@ struct PickerSetting_Previews: PreviewProvider {
         NavigationView {
             Form {
                 Section {
-                    PickerSetting("Title",
-                                  values: APIEnvironment.allCases,
-                                  selection: .constant(.development))
-                    PickerSetting("Title",
-                                  values: APIEnvironment.allCases,
-                                  selection: .constant(.development),
-                                  icon: SettingIcon("4k.tv.fill"))
-                    PickerSetting("Title",
-                                  values: APIEnvironment.allCases,
-                                  selection: .constant(.development),
-                                  icon: SettingIcon("4k.tv", color: .green))
+                    PickerSetting(
+                        "Title",
+                        values: APIEnvironment.allCases,
+                        selection: .constant(.development)
+                    )
+                    PickerSetting(
+                        "Title",
+                        values: APIEnvironment.allCases,
+                        selection: .constant(.development),
+                        icon: SettingIcon("4k.tv.fill")
+                    )
+                    PickerSetting(
+                        "Title",
+                        values: APIEnvironment.allCases,
+                        selection: .constant(.development),
+                        icon: SettingIcon("4k.tv")
+                    )
                 }
             }.navigationTitle("Settings")
         }

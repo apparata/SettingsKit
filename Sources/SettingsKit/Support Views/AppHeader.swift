@@ -79,12 +79,12 @@ struct AppHeader_Previews: PreviewProvider {
                 Section(header: AppHeader(name: "Placeholder", version: "1.0.0", icon: nil, title: "General")) {
                     LabelSetting("Title")
                     LabelSetting("Title", icon: SettingIcon("shippingbox.fill"))
-                    LabelSetting("Title", icon: SettingIcon("crown.fill", color: .green))
+                    LabelSetting("Title", icon: SettingIcon("crown.fill"))
                     NavigationLink(destination: Text("")) {
                         LabelSetting("Title")
                     }
                     NavigationLink(destination: Text("")) {
-                        LabelSetting("Title", icon: SettingIcon("mosaic.fill", color: .orange))
+                        LabelSetting("Title", icon: SettingIcon("mosaic.fill"))
                     }
                 }
             }.navigationTitle("Settings")

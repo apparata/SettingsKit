@@ -88,28 +88,34 @@ struct EnumSetting_Previews: PreviewProvider {
                 Section {
                     EnumSetting(
                         "Title",
-                        selection: .constant(APIEnvironment.development))
+                        selection: .constant(APIEnvironment.development)
+                    )
                     EnumSetting(
                         "Title",
                         selection: .constant(APIEnvironment.development),
-                        icon: SettingIcon("doc.text.fill.viewfinder"))
+                        icon: SettingIcon("doc.text.fill.viewfinder")
+                    )
                     EnumSetting(
                         "Title",
                         selection: .constant(APIEnvironment.development),
-                        icon: SettingIcon("person.fill.checkmark", color: .green))
+                        icon: SettingIcon("person.fill.checkmark")
+                    )
                 }
                 Section {
                     EnumSetting(
                         label: Text("Title"),
-                        selection: .constant(APIEnvironment.development))
+                        selection: .constant(APIEnvironment.development)
+                    )
                     EnumSetting(
                         label: Text("Title"),
                         selection: .constant(APIEnvironment.development),
-                        icon: SettingIcon("doc.text.fill.viewfinder"))
+                        icon: SettingIcon("doc.text.fill.viewfinder")
+                    )
                     EnumSetting(
                         label: Text("Title"),
                         selection: .constant(APIEnvironment.development),
-                        icon: SettingIcon("person.fill.checkmark", color: .green))
+                        icon: SettingIcon("person.fill.checkmark")
+                    )
                 }
             }.navigationTitle("Settings")
         }

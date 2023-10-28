@@ -8,11 +8,11 @@ import SwiftUI
 
 public struct LabelSetting<Label: View, Value: View>: View {
 
-    let icon: SettingIcon?
-    
-    let label: Label
-    
-    let value: Value?
+    private let icon: SettingIcon?
+
+    private let label: Label
+
+    private let value: Value?
 
     public var body: some View {
         HStack {
@@ -64,15 +64,22 @@ struct LabelValueSetting_Previews: PreviewProvider {
             Form {
                 Section {
                     LabelSetting("Title")
-                    LabelSetting("Title", icon: SettingIcon("shippingbox.fill"))
-                    LabelSetting("Title",
-                                 icon: SettingIcon("crown.fill", color: .green))
+                    LabelSetting(
+                        "Title",
+                        icon: SettingIcon("shippingbox.fill")
+                    )
+                    LabelSetting(
+                        "Title",
+                        icon: SettingIcon("crown.fill")
+                    )
                     NavigationLink(destination: Text("")) {
                         LabelSetting("Title")
                     }
                     NavigationLink(destination: Text("")) {
-                        LabelSetting("Title",
-                                     icon: SettingIcon("mosaic.fill", color: .orange))
+                        LabelSetting(
+                            "Title",
+                            icon: SettingIcon("mosaic.fill")
+                        )
                     }
                 }
                 Section {
