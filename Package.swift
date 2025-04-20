@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.10
 
 import PackageDescription
 
@@ -6,7 +6,7 @@ let package = Package(
     name: "SettingsKit",
     platforms: [
         // Relevant platforms.
-        .iOS(.v14), .macOS(.v11), .tvOS(.v14)
+        .iOS(.v17), .macOS(.v14), .tvOS(.v17)
     ],
     products: [
         .library(name: "SettingsKit", targets: ["SettingsKit"])
