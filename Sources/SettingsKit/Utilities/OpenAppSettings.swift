@@ -7,7 +7,8 @@
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
-public func openAppSettings(completionHandler: ((_ success: Bool) -> Void)? = nil) {
+@MainActor
+public func openAppSettings(completionHandler: (@MainActor (_ success: Bool) -> Void)? = nil) {
     guard let appSettingsURL = URL(string: UIApplication.openSettingsURLString) else {
         completionHandler?(false)
         return

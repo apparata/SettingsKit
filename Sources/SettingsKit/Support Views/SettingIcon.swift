@@ -46,7 +46,7 @@ extension View {
 
 // MARK: - SettingIconStyle
 
-public struct SettingIconStyle: Hashable {
+public struct SettingIconStyle: Sendable, Hashable {
     public let color: Color
     public let titleColor: Color
 
